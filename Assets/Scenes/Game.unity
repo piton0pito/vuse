@@ -11876,7 +11876,7 @@ GameObject:
   - component: {fileID: 1258970289}
   - component: {fileID: 1258970291}
   - component: {fileID: 1258970290}
-  m_Layer: 4
+  m_Layer: 5
   m_Name: Fade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11988,13 +11988,13 @@ GameObject:
   - component: {fileID: 1260622819}
   - component: {fileID: 1260622818}
   - component: {fileID: 1260622817}
-  m_Layer: 4
+  m_Layer: 5
   m_Name: Fade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1260622817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12044,7 +12044,7 @@ Canvas:
   m_GameObject: {fileID: 1260622816}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -12052,11 +12052,11 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1260622820
 RectTransform:
@@ -17636,7 +17636,7 @@ Canvas:
   m_GameObject: {fileID: 1984884380}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

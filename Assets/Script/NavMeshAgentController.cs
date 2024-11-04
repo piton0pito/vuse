@@ -2,13 +2,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI; // Не забудьте добавить этот using для работы с UI
 using TMPro;
+using System.Collections.Generic;
+using System.IO;
 
 public class NavMeshAgentController : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform target;
     public float stoppingDistance = 0.5f;
-    private bool isPause = false;
     private bool isGo = false;
     private bool isRotateCamera = false;
     private CharacterController characterController;
@@ -17,43 +18,45 @@ public class NavMeshAgentController : MonoBehaviour
     public TMP_Dropdown objectDropdown; // Ссылка на ваш Dropdown
     public Slider SpeedeAgent; // Ссылка на Slider 
 
+    private Dictionary<string, KeyCode> keyBindings = new Dictionary<string, KeyCode>();
+    private PauseMenu pauseMenu; // Ссылка на PauseMenu
+
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
         objectDropdown.onValueChanged.AddListener(delegate { SetTarget(objectDropdown.value); });
 
         SpeedeAgent.value = agent.speed;
-
         SpeedeAgent.onValueChanged.AddListener(SetSpeedeAgent);
 
         Rotation = agent.angularSpeed;
+
+        LoadKeyBindings(); // Загрузка привязок клавиш
+
+        pauseMenu = FindObjectOfType<PauseMenu>(); // Получаем ссылку на PauseMenu
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G) && !isGo)
+        if (Input.GetKeyDown(keyBindings["EnableNavigation"]) && !isGo)
         {
             EnableAgent();
             isGo = true;
         }
-        else if (Input.GetKeyDown(KeyCode.C))
+        else if (Input.GetKeyDown(keyBindings["DisableNavigation"]))
         {
             DisableAgent();
             isGo = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && !isPause)
+        if (FindObjectOfType<PauseMenu>().IsPaused() && isGo)
         {
             DisableAgent();
-            isPause = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape))
+
+        if (!FindObjectOfType<PauseMenu>().IsPaused() && isGo)
         {
-            if (isGo)
-            {
-                EnableAgent();
-            }
-            isPause = false;
+            EnableAgent();
         }
 
         if (isGo && agent.enabled)
@@ -61,7 +64,7 @@ public class NavMeshAgentController : MonoBehaviour
             CheckIfReachedTarget();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(keyBindings["ToggleCameraRotation"]))
         {
             if (isRotateCamera)
             {
@@ -73,7 +76,30 @@ public class NavMeshAgentController : MonoBehaviour
                 agent.angularSpeed = 0f;
                 isRotateCamera = true;
             }
+        }
+    }
 
+    private void LoadKeyBindings()
+    {
+        string filePath = Path.Combine(Application.streamingAssetsPath, "KeyBindings.txt");
+        if (File.Exists(filePath))
+        {
+            string[] lines = File.ReadAllLines(filePath);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split('=');
+                if (parts.Length == 2)
+                {
+                    string action = parts[0].Trim();
+                    KeyCode key = (KeyCode)System.Enum.Parse(typeof(KeyCode), parts[1].Trim());
+                    keyBindings[action] = key;
+                    Debug.Log($"Loaded key binding: {action} = {key}"); // Отладочное сообщение
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("KeyBindings.txt not found at: " + filePath);
         }
     }
 

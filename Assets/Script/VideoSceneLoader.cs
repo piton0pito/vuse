@@ -16,8 +16,26 @@ public class VideoSceneLoader : MonoBehaviour
         videoPlayer.Play();
     }
 
+    void Update()
+    {
+        // Проверяем, была ли нажата клавиша пробела
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SkipVideo();
+        }
+    }
+
     void OnVideoFinished(VideoPlayer vp)
     {
+        // Загружаем следующую сцену
+        SceneManager.LoadScene(nextSceneName);
+    }
+
+    void SkipVideo()
+    {
+        // Останавливаем видео
+        videoPlayer.Stop();
+
         // Загружаем следующую сцену
         SceneManager.LoadScene(nextSceneName);
     }

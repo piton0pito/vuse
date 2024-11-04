@@ -33,7 +33,7 @@ public class FirstPersonController : MonoBehaviour
 
     void LoadKeyBindings()
     {
-        string filePath = Path.Combine(Application.dataPath, "Data/KeyBindings.txt");
+        string filePath = Path.Combine(Application.streamingAssetsPath, "KeyBindings.txt");
         if (File.Exists(filePath))
         {
             string[] lines = File.ReadAllLines(filePath);

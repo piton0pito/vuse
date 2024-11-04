@@ -1,0 +1,12 @@
+MoveForward=W
+MoveBackward=S
+MoveLeft=A
+MoveRight=D
+Jump=Space
+Crouch=LeftControl
+Run=LeftShift
+Fly=F
+EnableNavigation=G
+DisableNavigation=C
+ToggleCameraRotation=R
+Pause=Escape
