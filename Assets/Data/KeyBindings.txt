@@ -1,0 +1,8 @@
+MoveForward=W
+MoveBackward=A
+MoveLeft=S
+MoveRight=D
+Jump=Space
+Crouch=LeftControl
+Run=LeftShift
+Fly=H

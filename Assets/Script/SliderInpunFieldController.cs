@@ -2,8 +2,7 @@ using UnityEngine;
 using UnityEngine.UI; // Не забудьте добавить этот using для Slider
 using TMPro; // Не забудьте добавить этот using для TextMeshPro
 
-
-public class SliderInputFieldController : MonoBehaviour
+public class SliderInpunFieldController : MonoBehaviour
 {
     public Slider slider; // Ссылка на компонент Slider
     public TMP_InputField inputField; // Ссылка на компонент InputField

@@ -3,12 +3,14 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI; // Переименовали переменную
+    private MainMenuManager mainMenuManager;
 
     private bool isPaused = false;
 
     void Start()
     {
         pauseMenuUI.SetActive(false);
+        mainMenuManager = FindObjectOfType<MainMenuManager>(); // Получаем ссылку на MainMenuManager
     }
 
     void Update()
@@ -34,6 +36,12 @@ public class PauseMenu : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        // Отключаем панели настроек, если они открыты
+        if (mainMenuManager != null)
+        {
+            mainMenuManager.BackToMainMenu(); // Вызываем метод, чтобы закрыть панели настроек
+        }
 
         pauseMenuUI.SetActive(true); // Используем новое имя переменной
     }

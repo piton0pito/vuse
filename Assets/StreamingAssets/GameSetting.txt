@@ -1,0 +1,2 @@
+MouseSensitivity=1
+AngleVive=100,3483
