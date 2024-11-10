@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class FirstPersonControllerJoystick : MonoBehaviour
 {
-    public Camera playerCamera;
     public CharacterController characterController;
     public Joystick joystick; // Ссылка на объект Joystick
 
@@ -11,18 +10,10 @@ public class FirstPersonControllerJoystick : MonoBehaviour
     private float ySpeed;
     private bool isGrounded;
     private Vector3 velocity;
-    private float xRotation = 0f;
-
-    private SettingsManager settingsManager; // Ссылка на SettingsManager
-
-    void Start()
-    {
-        settingsManager = FindObjectOfType<SettingsManager>(); // Находим SettingsManager в сцене
-    }
 
     void Update()
     {
-        if (FindObjectOfType<PauseMenu>().IsPaused())
+        if (FindObjectOfType<PauseMenuMobile>().IsPaused())
         {
             return;
         }
@@ -63,24 +54,5 @@ public class FirstPersonControllerJoystick : MonoBehaviour
 
         velocity.y = ySpeed;
         characterController.Move(velocity * Time.deltaTime);
-
-        // Ввод для вращения камеры с помощью свайпов
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Moved)
-            {
-                float joystickX = touch.deltaPosition.x * settingsManager.sensitivitySlider.value * Time.deltaTime;
-                float joystickY = touch.deltaPosition.y * settingsManager.sensitivitySlider.value * Time.deltaTime;
-
-                xRotation -= joystickY;
-                xRotation = Mathf.Clamp(xRotation, -60f, 60f);
-                playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-                transform.Rotate(Vector3.up * joystickX);
-            }
-        }
-
-        // Установка угла обзора камеры
-        playerCamera.fieldOfView = settingsManager.fovSlider.value; // Обновляем угол обзора
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class GraphicsSettingsManager : MonoBehaviour
+public class GraphicsSettingsManagerPc : MonoBehaviour
 {
     public TMP_Dropdown qualityDropdown;
     public Toggle fullscreenToggle;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FirstPersonController : MonoBehaviour
+public class FirstPersonControllerPC : MonoBehaviour
 {
     public Camera playerCamera;
     public CharacterController characterController;
@@ -24,20 +24,22 @@ public class FirstPersonController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         originalHeight = characterController.height;
-        inputManager = FindObjectOfType<InputManager>(); // Находим InputManager в сцене
+        inputManager = FindObjectOfType<InputManager>();
+
+        // Установка значения поля зрения камеры (можно установить значение по умолчанию)
+        playerCamera.fieldOfView = 60f; // Замените на желаемое значение по умолчанию
     }
 
     void Update()
     {
-        // Проверка на паузу
-        if (FindObjectOfType<PauseMenu>().IsPaused())
+        if (FindObjectOfType<PauseMenuPc>().IsPaused())
         {
-            return; // Прекращаем выполнение, если игра на паузе
+            return;
         }
 
         if (!characterController.enabled)
         {
-            return; // Прекращаем выполнение, если CharacterController отключен
+            return;
         }
 
         isGrounded = characterController.isGrounded;
@@ -93,15 +95,12 @@ public class FirstPersonController : MonoBehaviour
         characterController.Move(velocity * Time.deltaTime);
 
         // Ввод для вращения камеры
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        float mouseX = Input.GetAxis("Mouse X"); // Убрано умножение на mouseSensitivity
+        float mouseY = Input.GetAxis("Mouse Y"); // Убрано умножение на mouseSensitivity
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -60f, 60f);
         playerCamera.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
-
-        // Установка угла обзора камеры
-        playerCamera.fieldOfView = 60f; // Установите желаемый угол обзора
     }
 }

@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenuPc : MonoBehaviour
 {
     public GameObject pauseMenuUI; // Переименовали переменную
-    private MainMenuManager mainMenuManager;
+    private MainMenuManagerPc mainMenuManager;
 
     private bool isPaused = false;
 
     void Start()
     {
         pauseMenuUI.SetActive(false);
-        mainMenuManager = FindObjectOfType<MainMenuManager>(); // Получаем ссылку на MainMenuManager
+        mainMenuManager = FindObjectOfType<MainMenuManagerPc>(); // Получаем ссылку на MainMenuManager
     }
 
     void Update()

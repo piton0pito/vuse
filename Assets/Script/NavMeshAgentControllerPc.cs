@@ -5,7 +5,7 @@ using TMPro;
 using System.Collections.Generic;
 using System.IO;
 
-public class NavMeshAgentController : MonoBehaviour
+public class NavMeshAgentControllerPc : MonoBehaviour
 {
     public NavMeshAgent agent;
     public Transform target;
@@ -19,7 +19,7 @@ public class NavMeshAgentController : MonoBehaviour
     public Slider SpeedeAgent; // Ссылка на Slider 
 
     private Dictionary<string, KeyCode> keyBindings = new Dictionary<string, KeyCode>();
-    private PauseMenu pauseMenu; // Ссылка на PauseMenu
+    private PauseMenuPc pauseMenu; // Ссылка на PauseMenu
 
     private void Start()
     {
@@ -33,7 +33,7 @@ public class NavMeshAgentController : MonoBehaviour
 
         LoadKeyBindings(); // Загрузка привязок клавиш
 
-        pauseMenu = FindObjectOfType<PauseMenu>(); // Получаем ссылку на PauseMenu
+        pauseMenu = FindObjectOfType<PauseMenuPc>(); // Получаем ссылку на PauseMenu
     }
 
     private void Update()
@@ -49,12 +49,12 @@ public class NavMeshAgentController : MonoBehaviour
             isGo = false;
         }
 
-        if (FindObjectOfType<PauseMenu>().IsPaused() && isGo)
+        if (FindObjectOfType<PauseMenuPc>().IsPaused() && isGo)
         {
             DisableAgent();
         }
 
-        if (!FindObjectOfType<PauseMenu>().IsPaused() && isGo)
+        if (!FindObjectOfType<PauseMenuPc>().IsPaused() && isGo)
         {
             EnableAgent();
         }
