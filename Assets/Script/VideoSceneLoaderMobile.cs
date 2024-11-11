@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.SceneManagement;
 
-public class VideoSceneLoader : MonoBehaviour
+public class VideoSceneLoaderMobile : MonoBehaviour
 {
     public VideoPlayer videoPlayer; // Ссылка на компонент VideoPlayer
     public string nextSceneName; // Имя следующей сцены для загрузки
@@ -18,10 +18,14 @@ public class VideoSceneLoader : MonoBehaviour
 
     void Update()
     {
-        // Проверяем, была ли нажата клавиша пробела
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Проверяем, было ли касание экрана
+        if (Input.touchCount > 0)
         {
-            SkipVideo();
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                SkipVideo();
+            }
         }
     }
 

@@ -12,9 +12,21 @@ public class MainMenuManagerMobile : MonoBehaviour
         sceneTransition = FindObjectOfType<SceneTransition>();
     }
 
+    public void StartGame()
+    {
+        // Здесь вы можете загрузить сцену с игрой
+        sceneTransition.LoadScene("LoadGameScene"); // Замените "GameScene" на имя вашей сцены
+    }
+
     public void ExitToMenu()
     {
         Time.timeScale = 1f;
         sceneTransition.LoadScene("MainMenu");
+    }
+
+    public void ExitGame()
+    {
+        // Выход из игры
+        Application.Quit();
     }
 }

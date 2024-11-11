@@ -21,7 +21,7 @@ public class PanelManager : MonoBehaviour
             panel.SetActive(false);
         }
         mainPanel.SetActive(true);
-        EnableCanvas();
+        DisableCanvas();
     }
 
     // Метод для переключения панелей
@@ -42,9 +42,31 @@ public class PanelManager : MonoBehaviour
         }
     }
 
+    public void ExitMainPanel(string panelName)
+    {
+        // Находим соответствующую панель по имени
+        GameObject panel = System.Array.Find(panels, p => p.name == panelName);
+        if (panel != null)
+        {
+            panel.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning($"Panel with name {panelName} not found in the panels array!");
+        }
+
+        // Выключаем главную панель
+        mainPanel.SetActive(true);
+    }
+
     // Метод для включения Canvas (можно вызывать, когда нужно)
     public void EnableCanvas()
     {
         canvas.gameObject.SetActive(true);
+    }
+
+    public void DisableCanvas()
+    {
+        canvas.gameObject.SetActive(false);
     }
 }
