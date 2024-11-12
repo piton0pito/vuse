@@ -25,34 +25,30 @@ public class PanelManager : MonoBehaviour
     }
 
     // Метод для переключения панелей
-    public void SwitchPanel(string panelName)
+    public void SwitchPanel(GameObject panel)
     {
         // Выключаем главную панель
         mainPanel.SetActive(false);
 
-        // Находим соответствующую панель по имени
-        GameObject panel = System.Array.Find(panels, p => p.name == panelName);
         if (panel != null)
         {
             panel.SetActive(true);
         }
         else
         {
-            Debug.LogWarning($"Panel with name {panelName} not found in the panels array!");
+            Debug.LogWarning($"Panel with name {panel.name} not found in the panels array!");
         }
     }
 
-    public void ExitMainPanel(string panelName)
+    public void ExitMainPanel(GameObject panel)
     {
-        // Находим соответствующую панель по имени
-        GameObject panel = System.Array.Find(panels, p => p.name == panelName);
         if (panel != null)
         {
             panel.SetActive(false);
         }
         else
         {
-            Debug.LogWarning($"Panel with name {panelName} not found in the panels array!");
+            Debug.LogWarning($"Panel with name {panel} not found in the panels array!");
         }
 
         // Выключаем главную панель

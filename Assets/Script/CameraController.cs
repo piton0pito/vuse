@@ -3,11 +3,17 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Camera playerCamera;
-    public float mouseSensitivity = 2f; // Чувствительность мыши
     private float xRotation = 0f;
 
     // Ссылки на панели, на которых будут обрабатываться касания
     public RectTransform[] touchPanels;
+
+    private GameSettingController gameSettingController; // Ссылка на CameraSettings
+
+    void Start()
+    {
+        gameSettingController = FindObjectOfType<GameSettingController>(); // Ищем объект CameraSettings
+    }
 
     void Update()
     {
@@ -38,8 +44,8 @@ public class CameraController : MonoBehaviour
 
     private void RotateCamera(Vector2 deltaPosition)
     {
-        float joystickX = deltaPosition.x * mouseSensitivity * Time.deltaTime; // Используем mouseSensitivity
-        float joystickY = deltaPosition.y * mouseSensitivity * Time.deltaTime; // Используем mouseSensitivity
+        float joystickX = deltaPosition.x * gameSettingController.GetMouseSensitivity() * Time.deltaTime; // Используем чувствительность из CameraSettings
+        float joystickY = deltaPosition.y * gameSettingController.GetMouseSensitivity() * Time.deltaTime; // Используем чувствительность из CameraSettings
 
         xRotation -= joystickY;
         xRotation = Mathf.Clamp(xRotation, -60f, 60f);
